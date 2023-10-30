@@ -92,3 +92,45 @@ personalMovieDB.writeYourGenres()
 personalMovieDB.toggleVisibleMyDB()
 personalMovieDB.toggleVisibleMyDB()
 personalMovieDB.showMyDB()
+
+
+//Exercise 13
+
+const shoppingMallData = {
+    shops: [
+        {
+            width: 10,
+            length: 5
+        },
+        {
+            width: 15,
+            length: 7
+        },
+        {
+            width: 20,
+            length: 5
+        },
+        {
+            width: 8,
+            length: 10
+        }
+    ],
+    height: 5,
+    moneyPer1m3: 30,
+    budget: 50000
+}
+
+function isBudgetEnough(data) {
+    let totalS = 0
+    data.shops.forEach((item) => {totalS += item.width*item.length})
+    let totalV = totalS*data.height
+    let budgetNeed = totalV*data.moneyPer1m3
+
+    console.log(`Общий отапливаемый объем - ${totalV} м3`)
+    console.log(`Общая стоимость отопления - ${budgetNeed} р`)
+
+    if (budgetNeed <= data.budget)  {console.log('Бюджета достаточно!')} else {console.log('Бюджета не достаточно!')}
+    
+}
+
+isBudgetEnough(shoppingMallData)
