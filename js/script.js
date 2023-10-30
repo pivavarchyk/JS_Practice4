@@ -16,7 +16,7 @@
 
 // Код возьмите из предыдущего домашнего задания
 
-/* const personalMovieDB = {
+const personalMovieDB = {
     count: 0,
     movies: {},
     actors: {},
@@ -133,11 +133,11 @@ function isBudgetEnough(data) {
     
 }
 
-isBudgetEnough(shoppingMallData) */
+isBudgetEnough(shoppingMallData)
 
 //Exercise14
 
-const students = ['Peter', 'Andrew', 'Ann', 'Mark', 'Josh', 'Sandra', 'Cris', 'Bernard', 'Takesi', 'Sam'];
+/* const students = ['Peter', 'Andrew', 'Ann', 'Mark', 'Josh', 'Sandra', 'Cris', 'Bernard', 'Takesi', 'Sam'];
 
 function sortStudentsByGroups(arr) {
     arr.sort()
@@ -159,6 +159,43 @@ function sortStudentsByGroups(arr) {
     }
         
     return [a,b,c, `Оставшиеся студенты: ${rest.length === 0 ? '-' : rest.join(', ')}`]
+}
+
+console.log(sortStudentsByGroups(students)) */
+
+//Мое решение - более гибкий вариант. Меняем число участников в команде - алгоритм сам подбирает макс. возможное число команд и выводит остаток
+
+const students = ['Peter', 'Andrew', 'Ann', 'Mark', 'Josh', 'Sandra', 'Cris', 'Bernard', 'Takesi', 'Sam'];
+
+function sortStudentsByGroups(arr) {
+    arr.sort()
+
+    let numOfPlayers = 3
+    const numOfTeams = Math.floor(arr.length/numOfPlayers)
+    const teams = []
+    const rest = []
+
+    for (let i = 0; i < arr.length;) {
+
+        teams: for (let t = 0; t < numOfTeams; t++) {
+            if (i >= numOfTeams*numOfPlayers) break teams
+            const team = []
+
+            players: for (let p = 0; p < numOfPlayers; p++) {
+                if (i >= numOfTeams*numOfPlayers) break players
+                team.push(arr[i])
+                i++
+            }
+
+            teams.push(team)
+        }
+
+        if (i < arr.length) {rest.push(arr[i])}
+        i++
+    }
+
+    teams.push(`Оставшиеся студенты: ${rest.length === 0 ? '-' : rest.join(', ')}`)
+    return teams
 }
 
 console.log(sortStudentsByGroups(students))
